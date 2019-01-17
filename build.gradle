@@ -23,6 +23,8 @@ allprojects {
             dirs 'libs'
         }
         maven { url 'https://jitpack.io' }
+
+        //STEP 1: Gradle Dependencies: Project level
         maven {
             url "http://dabkick.bitnamiapp.com/artifactory/android-dev-engine-local/"
         }
