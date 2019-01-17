@@ -26,14 +26,18 @@ Its a quick deployment of a highly functional multi-room group live chat capabil
                                             What does the Sample Application do?
 It is a fully functional messaging app and showcases the capabilities of DK LiveChat library.
     
-                                             APK Download
-Please download APK for the Sample Application from this link: 
+
+                                            LINKS TO MORE EXPLORATION OPTIONS
+
+                                             Sample Application: APK Download
+
+You can download APK for the Sample Application from here:
 https://securequery.dabkick.com/chatSample/DKLiveChatSample.apk
 
-For More Information visit the following link:
-http://www.novelty-data.com/DK/MVP3/live-chat.html
-
 For detailed integration steps visit the following link:
-http://www.novelty-data.com/DK/MVP3/live-chat.html#android-overview-section&1866
+https://api.dabkick.com/livechat/live-chat.html#android-overview-section&1888
+
+For more information about this product, please visit our website:
+https://api.dabkick.com/livechat/
  
 
