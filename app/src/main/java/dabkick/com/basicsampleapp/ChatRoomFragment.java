@@ -449,7 +449,7 @@ public class ChatRoomFragment extends Fragment {
     public void showAlertDialogWhileExiting() {
         AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity);
         builder.setMessage("Would you like to")
-                .setPositiveButton("Stay Subscribed", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Stay Subscribed - You will still listen to messages", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         SplashScreenActivity.dkLiveChat.leaveSession(mRoomName, new CallbackListener() {
                             @Override
@@ -466,7 +466,7 @@ public class ChatRoomFragment extends Fragment {
                         //do nothing else as the user will remain subscribed
                     }
                 })
-                .setNegativeButton("Unsubscribe", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Unsubscribe - You will not receive any messages", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         SplashScreenActivity.dkLiveChat.leaveSession(mRoomName, new CallbackListener() {
                             @Override
