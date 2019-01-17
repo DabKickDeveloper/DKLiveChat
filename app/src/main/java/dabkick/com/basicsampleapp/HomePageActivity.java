@@ -91,6 +91,9 @@ public class HomePageActivity extends BaseActivity {
 
     public void initChatRooms() {
         if (SplashScreenActivity.dkLiveChat.chatRoomListener != null) {
+
+
+            //STEP 4: Get List Of chat rooms Or Create a new chat room
             SplashScreenActivity.dkLiveChat.chatRoomListener.getRoomList(new CallbackListener() {
                 @Override
                 public void onSuccess(String msg, Object... obj) {
@@ -490,7 +493,8 @@ public class HomePageActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //disconnect from firebase but retain user details
+
+        //STEP 9: Ending livechat session
         SplashScreenActivity.dkLiveChat.endLiveChat();
     }
 
