@@ -73,7 +73,6 @@ public class SplashScreenActivity extends BaseActivity {
         mUserId.setText(userId);
         mUserId.setSelection(userId.length());
 
-
     }
 
     public void initEngine() {
