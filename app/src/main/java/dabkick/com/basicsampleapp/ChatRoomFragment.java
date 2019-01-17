@@ -135,6 +135,9 @@ public class ChatRoomFragment extends Fragment {
 
         try {
             if (getActivity().getClass() == HomePageActivity.class) {
+
+
+                //STEP 5: Joining a room: Enter
                 SplashScreenActivity.dkLiveChat.joinSession(mRoomName, createUserInfo(), new CallbackListener() {
                     @Override
                     public void onSuccess(String msg, Object... obj) {
@@ -171,6 +174,8 @@ public class ChatRoomFragment extends Fragment {
             });
         }
 
+
+        //STEP 7: Tracking users in the room: Entry, Exit, User Information Updates
         mUserCount.setText(String.valueOf(SplashScreenActivity.dkLiveChat.getNumberOfUsersLiveNow(mRoomName, new CallbackListener() {
             @Override
             public void onSuccess(String s, Object... objects) {
@@ -186,6 +191,8 @@ public class ChatRoomFragment extends Fragment {
         if (((HomePageActivity) getActivity()).liveChatCallbackListener == null) {
             ((HomePageActivity) getActivity()).liveChatCallbackListener = new LiveChatCallbackListener() {
                 @Override
+
+                //STEP 6: Sending and Receiving Messages
                 public void receivedChatMessage(String roomName, MessageInfo message) {
                     BaseActivity.mCurrentActivity.runOnUiThread(new Runnable() {
                         @Override
@@ -220,6 +227,9 @@ public class ChatRoomFragment extends Fragment {
         if (((HomePageActivity) getActivity()).userPresenceCallBackListener == null) {
             ((HomePageActivity) getActivity()).userPresenceCallBackListener = new UserPresenceCallBackListener() {
                 @Override
+
+                //STEP 7: Tracking users in the room: Entry, Exit, User Information Updates
+
                 public void userEntered(String roomName, UserInfo participant) {
                     //process user entry
                     String userEnteredMessage = participant.getName() + " entered the room";
@@ -234,6 +244,8 @@ public class ChatRoomFragment extends Fragment {
 
 
                 @Override
+
+                //STEP 7: Tracking users in the room: Entry, Exit, User Information Updates
                 public void userExited(String roomName, UserInfo participant) {
                     //process user exit
                     String userEnteredMessage = participant.getName() + " exited the room";
@@ -248,6 +260,8 @@ public class ChatRoomFragment extends Fragment {
 
 
                 @Override
+
+                //STEP 7: Tracking users in the room: Entry, Exit, User Information Updates
                 public void userDataUpdated(String roomName, UserInfo participant) {
                     //process user info change
                 }
@@ -257,6 +271,9 @@ public class ChatRoomFragment extends Fragment {
 
         if (!SplashScreenActivity.dkLiveChat.isSubscribed(mRoomName)) {
             mProgressBar.setVisibility(View.VISIBLE);
+
+            //STEP 5: Joining a room: subscribe
+
             SplashScreenActivity.dkLiveChat.subscribe(mRoomName, ((HomePageActivity) getActivity()).liveChatCallbackListener, ((HomePageActivity) getActivity()).userPresenceCallBackListener, new CallbackListener() {
                 @Override
                 public void onSuccess(String msg, Object... obj) {
@@ -428,6 +445,8 @@ public class ChatRoomFragment extends Fragment {
             showAlertDialogWhileExiting();
             return;
         } else {
+
+            //STEP 8: Exiting a room: Leave
             SplashScreenActivity.dkLiveChat.leaveSession(mRoomName, new CallbackListener() {
                 @Override
                 public void onSuccess(String s, Object... objects) {
@@ -468,6 +487,9 @@ public class ChatRoomFragment extends Fragment {
                 })
                 .setNegativeButton("Unsubscribe - You will not receive any messages", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
+
+                        //STEP 8: Exiting a room: Leave
                         SplashScreenActivity.dkLiveChat.leaveSession(mRoomName, new CallbackListener() {
                             @Override
                             public void onSuccess(String s, Object... objects) {
@@ -479,6 +501,8 @@ public class ChatRoomFragment extends Fragment {
 
                             }
                         });
+
+                        //STEP 8: Exiting a room: unsubscribe
                         SplashScreenActivity.dkLiveChat
                                 .unSubscribe(mRoomName, liveChatCallbackListener, userPresenceCallBackListener, new CallbackListener() {
                                     @Override
@@ -509,6 +533,8 @@ public class ChatRoomFragment extends Fragment {
                 return;
             MessageInfo messageInfo = new MessageInfo();
             messageInfo.setChatMessage(message);
+
+            //STEP 6: Sending and Receiving Messages
             dkLiveChat.chatEventListener.sendMessage(roomName, messageInfo, new CallbackListener() {
                 @Override
                 public void onSuccess(String msg, Object... obj) {

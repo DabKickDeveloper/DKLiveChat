@@ -88,6 +88,9 @@ public class SplashScreenActivity extends BaseActivity {
             devId = "DK09aff676f38011e88a1a06f";
             devKey = "3d8a7db548d5d91447d64d09a37f12";
             authentication = new Authentication("DK09aff676f38011e88a1a06f", "3d8a7db548d5d91447d64d09a37f12");
+
+            //STEP 3: Initialize DK LiveChat
+
             dkLiveChat = new DKLiveChat(this, authentication, new CallbackListener() {
                 @Override
                 public void onSuccess(String s, Object... objects) {
