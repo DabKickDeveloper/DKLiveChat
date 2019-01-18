@@ -32,7 +32,7 @@ It is a fully functional messaging app and showcases the capabilities of DK Live
                                              Sample Application: APK Download
 
 You can download APK for the Sample Application from here:
-https://securequery.dabkick.com/chatSample/DKLiveChatSample.apk
+http://bit.ly/DKLiveChat
 
 For detailed integration steps visit the following link:
 https://api.dabkick.com/livechat/live-chat.html
