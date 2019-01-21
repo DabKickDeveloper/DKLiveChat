@@ -118,6 +118,10 @@ public class ChatRoomFragment extends Fragment {
             }
         }
 
+        if (BaseActivity.mCurrentActivity.getClass() == HomePageActivity.class) {
+            ((HomePageActivity) getActivity()).updateFloatingBtn(false);
+        }
+
         mRoomTitle.setText(mRoomName);
 
         chatMsgAdapter = new ChatMsgAdapter();
@@ -399,10 +403,6 @@ public class ChatRoomFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        if (getActivity().getClass() == HomePageActivity.class) {
-            ((HomePageActivity) getActivity()).updateFloatingBtn(false);
-        }
 
         if (getView() == null) {
             return;
