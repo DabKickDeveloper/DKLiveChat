@@ -50,20 +50,20 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
 //        Picasso.get().load("").placeholder(R.drawable.avatar_img).error(R.drawable.avatar_img).into(messageHolder.profileImg);
 
         //for time stamp
-        Log.d("TIMESTAMP", "" + messageInfoList.get(i).getMessageTime());
-        try {
-            long currentMsgTime = messageInfoList.get(i).getMessageTime();
-            long prevMsgTime = 0L;
-            if (i > 0) {
-                prevMsgTime = (messageInfoList.get(i - 1)).getMessageTime();
+        if(!messageInfoList.get(i).isSystemMessage()) {
+            try {
+                long currentMsgTime = messageInfoList.get(i).getMessageTime();
+                long prevMsgTime = 0L;
+                if (i > 0) {
+                    prevMsgTime = (messageInfoList.get(i - 1)).getMessageTime();
+                }
+                messageHolder.timeStamp.setText(Utils.millisToTime(currentMsgTime));
+                setTimeTextVisibility(currentMsgTime, prevMsgTime, messageHolder.dateTextLayout);
+
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
-            messageHolder.timeStamp.setText(Utils.millisToTime(currentMsgTime));
-            setTimeTextVisibility(currentMsgTime, prevMsgTime, messageHolder.dateTextLayout);
-
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
         }
-
     }
 
     @Override
