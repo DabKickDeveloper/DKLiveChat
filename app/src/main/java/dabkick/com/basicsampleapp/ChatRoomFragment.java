@@ -47,8 +47,7 @@ public class ChatRoomFragment extends Fragment {
 
     @BindView(R.id.edittext)
     EditText editText;
-    @BindView(R.id.chat_list)
-    RecyclerView chatListRecyclerView;
+    static RecyclerView chatListRecyclerView;
     @BindView(R.id.button)
     AppCompatImageView button;
     @BindView(R.id.back_arrow)
@@ -120,6 +119,7 @@ public class ChatRoomFragment extends Fragment {
 
         mRoomTitle.setText(mRoomName);
 
+        chatListRecyclerView = view.findViewById(R.id.chat_list);
         chatMsgAdapter = new ChatMsgAdapter();
         chatListRecyclerView.setAdapter(chatMsgAdapter);
         chatListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -197,11 +197,11 @@ public class ChatRoomFragment extends Fragment {
                                 ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.setLatestRoomMsg(roomName, message.getChatMessage()/*, timestamp to be passed here*/);
                                 if (roomName.equalsIgnoreCase(mRoomName)) {
                                     chatMsgAdapter.addMessage(message);
-                                    if ((chatMsgAdapter.getItemCount() - ((LinearLayoutManager) chatListRecyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition()) > 2) {
+                                   /* if ((chatMsgAdapter.getItemCount() - ((LinearLayoutManager) chatListRecyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition()) > 2) {
                                         mNewMsgArrow.setVisibility(View.VISIBLE);
-                                    } else {
-                                        scrollToLatestMsg();
-                                    }
+                                    } else {*/
+                                    scrollToLatestMsg();
+//                                    }
                                 } else if (!message.getUserName().equalsIgnoreCase(name)) {
                                     //i am not in the same room as the msg received and am not the sender of the msg. So add it as unread msg
                                     if (BaseActivity.mCurrentActivity.getClass() == HomePageActivity.class) {
@@ -233,8 +233,10 @@ public class ChatRoomFragment extends Fragment {
                     messageInfo.setUserName(participant.getName());
                     messageInfo.setChatMessage(userEnteredMessage);
                     messageInfo.setSystemMessage(true);
-                    if (chatMsgAdapter != null)
+                    if (chatMsgAdapter != null) {
                         chatMsgAdapter.addMessage(messageInfo);
+                        scrollToLatestMsg();
+                    }
                 }
 
 
@@ -249,8 +251,10 @@ public class ChatRoomFragment extends Fragment {
                     messageInfo.setUserName(participant.getName());
                     messageInfo.setChatMessage(userEnteredMessage);
                     messageInfo.setSystemMessage(true);
-                    if (chatMsgAdapter != null)
+                    if (chatMsgAdapter != null) {
                         chatMsgAdapter.addMessage(messageInfo);
+                        scrollToLatestMsg();
+                    }
                 }
 
 
