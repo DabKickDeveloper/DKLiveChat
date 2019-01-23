@@ -377,25 +377,24 @@ public class ChatRoomFragment extends Fragment {
                     ((HomePageActivity) getActivity()).updateFloatingBtn(false);
                 }
 
-                if (getView() == null) {
-                    return;
-                }
+                if (getView() != null) {
+                    getView().setFocusableInTouchMode(true);
+                    getView().requestFocus();
+                    getView().setOnKeyListener(new View.OnKeyListener() {
+                        @Override
+                        public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-                getView().setFocusableInTouchMode(true);
-                getView().requestFocus();
-                getView().setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                        if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                            // handle back button's click listener
-                            //backBtnClicked();
-                            showAlertDialogWhileExiting();
-                            return true;
+                            if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                                // handle back button's click listener
+                                //backBtnClicked();
+                                showAlertDialogWhileExiting();
+                                return true;
+                            }
+                            return false;
                         }
-                        return false;
-                    }
-                });
+                    });
+
+                }
             }
         };
 
