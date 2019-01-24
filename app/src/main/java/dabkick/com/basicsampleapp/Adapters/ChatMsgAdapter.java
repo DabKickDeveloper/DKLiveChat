@@ -42,7 +42,7 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
     public void onBindViewHolder(@NonNull MessageHolder messageHolder, int i) {
         String name = messageInfoList.get(i).getUserName();
         Log.d("ChatMsgAdapter", "Value of user id is " + messageInfoList.get(i).getUserId());
-
+        //set name to you, if its your message
         if(!TextUtils.isEmpty(SplashScreenActivity.dkLiveChat.getUserId()) && SplashScreenActivity.dkLiveChat.getUserId().equalsIgnoreCase(messageInfoList.get(i).getUserId())) {
             messageHolder.name.setText("You");
         } else if (name != null && !name.trim().isEmpty()) {

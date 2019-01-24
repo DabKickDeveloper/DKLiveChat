@@ -373,7 +373,7 @@ public class ChatRoomFragment extends Fragment {
         fragmentCloseListener = new FragmentCloseListener() {
             @Override
             public void handleFragmentClose() {
-                if (getActivity().getClass() == HomePageActivity.class) {
+                if (BaseActivity.mCurrentActivity.getClass() == HomePageActivity.class) {
                     ((HomePageActivity) getActivity()).updateFloatingBtn(false);
                 }
 
@@ -385,8 +385,6 @@ public class ChatRoomFragment extends Fragment {
                         public boolean onKey(View v, int keyCode, KeyEvent event) {
 
                             if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                                // handle back button's click listener
-                                //backBtnClicked();
                                 showAlertDialogWhileExiting();
                                 return true;
                             }
