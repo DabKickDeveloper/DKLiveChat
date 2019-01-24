@@ -10,20 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.dabkick.engine.Public.DKLiveChat;
 import com.dabkick.engine.Public.MessageInfo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import dabkick.com.basicsampleapp.BaseActivity;
-import dabkick.com.basicsampleapp.PreferenceHandler;
 import dabkick.com.basicsampleapp.R;
 import dabkick.com.basicsampleapp.SplashScreenActivity;
 import dabkick.com.basicsampleapp.Utils.Utils;
 import de.hdodenhof.circleimageview.CircleImageView;
-import timber.log.Timber;
 
 public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageHolder> {
 
@@ -41,9 +37,10 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
     @Override
     public void onBindViewHolder(@NonNull MessageHolder messageHolder, int i) {
         String name = messageInfoList.get(i).getUserName();
-   //     Log.d("ChatMsgAdapter", "Value of user id is " + messageInfoList.get(i).getUserId());
+        //     Log.d("ChatMsgAdapter", "Value of user id is " + messageInfoList.get(i).getUserId());
         //set name to you, if its your message
-        if(!TextUtils.isEmpty(SplashScreenActivity.dkLiveChat.getUserId()) && SplashScreenActivity.dkLiveChat.getUserId().equalsIgnoreCase(messageInfoList.get(i).getUserId())) {
+        String userId = messageInfoList.get(i).getId();
+        if (!TextUtils.isEmpty(SplashScreenActivity.dkLiveChat.getUserId()) && SplashScreenActivity.dkLiveChat.getUserId().equalsIgnoreCase(userId)) {
             messageHolder.name.setText("You");
         } else if (name != null && !name.trim().isEmpty()) {
             messageHolder.name.setText(messageInfoList.get(i).getUserName());
@@ -52,7 +49,7 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
 
         //for time stamp
         Log.d("ChatMsgAdapter", "isSystemMsg " + messageInfoList.get(i).isSystemMessage());
-        if(!messageInfoList.get(i).isSystemMessage()) {
+        if (!messageInfoList.get(i).isSystemMessage()) {
             Log.d("ChatMsgAdapter", "inside if");
             try {
                 long currentMsgTime = messageInfoList.get(i).getMessageTime();
