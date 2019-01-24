@@ -75,7 +75,7 @@ public class HomePageActivity extends BaseActivity {
         bottomSheet.addOnSheetStateChangeListener(new BottomSheetLayout.OnSheetStateChangeListener() {
             @Override
             public void onSheetStateChanged(BottomSheetLayout.State state) {
-                if(state == BottomSheetLayout.State.HIDDEN){
+                if (state == BottomSheetLayout.State.HIDDEN) {
                     //updateFloatingBtn(true);
                 } else {
                     updateFloatingBtn(false);
@@ -180,7 +180,7 @@ public class HomePageActivity extends BaseActivity {
 
     @OnClick(R.id.create_room)
     public void createNewRoom() {
-        if(bottomSheet != null && bottomSheet.isSheetShowing())
+        if (bottomSheet != null && bottomSheet.isSheetShowing())
             bottomSheet.dismissSheet();
 
         Utils.showKB(HomePageActivity.this);
@@ -331,6 +331,7 @@ public class HomePageActivity extends BaseActivity {
     public void showAlertForEnteringName(String roomName) {
         AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity);
         final EditText edittext = new EditText(getApplicationContext());
+        edittext.setTextColor(getResources().getColor(android.R.color.black));
         builder.setTitle("How would you like yourself to be called as?");
         builder.setView(edittext);
         builder.setPositiveButton("Set Name", new DialogInterface.OnClickListener() {
