@@ -41,7 +41,7 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
     @Override
     public void onBindViewHolder(@NonNull MessageHolder messageHolder, int i) {
         String name = messageInfoList.get(i).getUserName();
-        Log.d("ChatMsgAdapter", "Value of user id is " + messageInfoList.get(i).getUserId());
+   //     Log.d("ChatMsgAdapter", "Value of user id is " + messageInfoList.get(i).getUserId());
         //set name to you, if its your message
         if(!TextUtils.isEmpty(SplashScreenActivity.dkLiveChat.getUserId()) && SplashScreenActivity.dkLiveChat.getUserId().equalsIgnoreCase(messageInfoList.get(i).getUserId())) {
             messageHolder.name.setText("You");
@@ -51,19 +51,24 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
         messageHolder.msg.setText(messageInfoList.get(i).getChatMessage());
 
         //for time stamp
+        Log.d("ChatMsgAdapter", "isSystemMsg " + messageInfoList.get(i).isSystemMessage());
         if(!messageInfoList.get(i).isSystemMessage()) {
+            Log.d("ChatMsgAdapter", "inside if");
             try {
                 long currentMsgTime = messageInfoList.get(i).getMessageTime();
                 long prevMsgTime = 0L;
                 if (i > 0) {
                     prevMsgTime = (messageInfoList.get(i - 1)).getMessageTime();
                 }
+                messageHolder.timeStamp.setVisibility(View.VISIBLE);
                 messageHolder.timeStamp.setText(Utils.millisToTime(currentMsgTime));
                 setTimeTextVisibility(currentMsgTime, prevMsgTime, messageHolder.dateTextLayout);
 
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
+        } else {
+            messageHolder.timeStamp.setVisibility(View.GONE);
         }
     }
 
