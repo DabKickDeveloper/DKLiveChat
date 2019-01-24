@@ -466,7 +466,7 @@ public class ChatRoomFragment extends Fragment {
 
 
     public void showAlertDialogWhileExiting() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity, R.style.ExitChatRoomDialogTheme);
         builder.setMessage("Would you like to")
                 .setPositiveButton("Stay Subscribed - You will still listen to messages", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
