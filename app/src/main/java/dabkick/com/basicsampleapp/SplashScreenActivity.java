@@ -124,7 +124,8 @@ public class SplashScreenActivity extends BaseActivity {
 
                 @Override
                 public void onFailure(Call<DeveloperData> call, Throwable t) {
-                    mDoneBtn.setEnabled(true);
+                    if(mDoneBtn != null)
+                        mDoneBtn.setEnabled(true);
                     Toast.makeText(BaseActivity.mCurrentActivity, "Authentication failed.", Toast.LENGTH_SHORT).show();
                 }
             });
