@@ -332,7 +332,7 @@ public class HomePageActivity extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity);
         final EditText edittext = new EditText(getApplicationContext());
         edittext.setTextColor(getResources().getColor(android.R.color.black));
-        builder.setTitle("How would you like yourself to be called as?");
+        builder.setTitle("What is your name?");
         builder.setView(edittext);
         builder.setPositiveButton("Set Name", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
