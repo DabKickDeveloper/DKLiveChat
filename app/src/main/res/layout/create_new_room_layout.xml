@@ -9,20 +9,22 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:text="Create Room"
-        android:textSize="20sp"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/create_room_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter room name"
         android:layout_marginTop="5dp"
+        android:hint="Enter room name"
+        android:maxLines="2"
+        android:singleLine="true"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:maxLines="2">
+        android:textSize="20sp">
 
     </android.support.v7.widget.AppCompatEditText>
 

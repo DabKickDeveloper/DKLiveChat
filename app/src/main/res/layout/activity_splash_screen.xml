@@ -37,8 +37,8 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/rounded_corner"
                 android:hint="@string/enter_user_name_hint"
-                android:visibility="gone"
-                android:paddingLeft="10dp" />
+                android:paddingLeft="10dp"
+                android:visibility="gone" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/user_id_edit_text"
@@ -50,7 +50,9 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/rounded_corner"
                 android:hint="@string/enter_user_id"
-                android:paddingLeft="10dp" />
+                android:maxLength="25"
+                android:paddingLeft="10dp"
+                android:singleLine="true" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/dev_id_edit_text"
