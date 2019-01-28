@@ -1,7 +1,6 @@
 package dabkick.com.basicsampleapp;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -17,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -392,7 +392,6 @@ public class ChatRoomFragment extends Fragment {
         };
 
 
-
         return view;
     }
 
@@ -466,63 +465,68 @@ public class ChatRoomFragment extends Fragment {
 
 
     public void showAlertDialogWhileExiting() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity);
-        builder.setMessage("Would you like to")
-                .setPositiveButton("Stay Subscribed - You will still listen to messages", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        SplashScreenActivity.dkLiveChat.leaveSession(mRoomName, new CallbackListener() {
-                            @Override
-                            public void onSuccess(String s, Object... objects) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity, R.style.ExitChatRoomDialogTheme);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.subscribe_layout, null);
+        builder.setView(dialogView);
 
-                            }
+        Button subscribe = dialogView.findViewById(R.id.subscribe);
+        Button unSubscribe = dialogView.findViewById(R.id.unsubscribe);
+        subscribe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SplashScreenActivity.dkLiveChat.leaveSession(mRoomName, new CallbackListener() {
+                    @Override
+                    public void onSuccess(String s, Object... objects) {
 
-                            @Override
-                            public void onError(String s, Object... objects) {
-
-                            }
-                        });
-                        getActivity().onBackPressed();
-                        //do nothing else as the user will remain subscribed
                     }
-                })
-                .setNegativeButton("Unsubscribe - You will not receive any messages", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
 
-
-                        //STEP 8: Exiting a room: Leave
-                        SplashScreenActivity.dkLiveChat.leaveSession(mRoomName, new CallbackListener() {
-                            @Override
-                            public void onSuccess(String s, Object... objects) {
-
-                            }
-
-                            @Override
-                            public void onError(String s, Object... objects) {
-
-                            }
-                        });
-
-                        //STEP 8: Exiting a room: unsubscribe
-                        SplashScreenActivity.dkLiveChat
-                                .unSubscribe(mRoomName, liveChatCallbackListener, userPresenceCallBackListener, new CallbackListener() {
-                                    @Override
-                                    public void onSuccess(String msg, Object... obj) {
-                                        if (((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter != null) {
-                                            Room room = ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.getRoomItem(mRoomName);
-                                            if (room != null)
-                                                ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.updateRoomUponUnsubscribe(room);
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onError(String msg, Object... obj) {
-                                    }
-                                });
-
-                        getActivity().onBackPressed();
+                    @Override
+                    public void onError(String s, Object... objects) {
 
                     }
                 });
+                getActivity().onBackPressed();
+                //do nothing else as the user will remain subscribed
+            }
+        });
+
+        unSubscribe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //STEP 8: Exiting a room: Leave
+                SplashScreenActivity.dkLiveChat.leaveSession(mRoomName, new CallbackListener() {
+                    @Override
+                    public void onSuccess(String s, Object... objects) {
+
+                    }
+
+                    @Override
+                    public void onError(String s, Object... objects) {
+
+                    }
+                });
+
+                //STEP 8: Exiting a room: unsubscribe
+                SplashScreenActivity.dkLiveChat
+                        .unSubscribe(mRoomName, liveChatCallbackListener, userPresenceCallBackListener, new CallbackListener() {
+                            @Override
+                            public void onSuccess(String msg, Object... obj) {
+                                if (((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter != null) {
+                                    Room room = ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.getRoomItem(mRoomName);
+                                    if (room != null)
+                                        ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.updateRoomUponUnsubscribe(room);
+                                }
+                            }
+
+                            @Override
+                            public void onError(String msg, Object... obj) {
+                            }
+                        });
+
+                getActivity().onBackPressed();
+            }
+        });
         builder.setCancelable(true).create().show();
     }
 
