@@ -75,8 +75,8 @@ public class HomePageActivity extends BaseActivity {
         bottomSheet.addOnSheetStateChangeListener(new BottomSheetLayout.OnSheetStateChangeListener() {
             @Override
             public void onSheetStateChanged(BottomSheetLayout.State state) {
-                if(state == BottomSheetLayout.State.HIDDEN){
-                    //updateFloatingBtn(true);
+                if (state == BottomSheetLayout.State.HIDDEN) {
+                    updateFloatingBtn(true);
                 } else {
                     updateFloatingBtn(false);
                 }
@@ -503,7 +503,6 @@ public class HomePageActivity extends BaseActivity {
     public void onBackPressed() {
         if (bottomSheet != null && bottomSheet.isSheetShowing()) {
             bottomSheet.dismissSheet();
-            updateFloatingBtn(true);
         } else
             super.onBackPressed();
 
