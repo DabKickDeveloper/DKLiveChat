@@ -10,4 +10,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tab">\u0009</string>
+    <string name="do_you_want_to_be_notified_about_new_messages">Do you want to be notified about new messages?</string>
+    <string name="yes_subscribe_me">Yes, Subscribe me</string>
+    <string name="no_thanks">No Thanks</string>
 </resources>
