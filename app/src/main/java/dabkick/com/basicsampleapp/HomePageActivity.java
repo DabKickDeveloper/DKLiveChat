@@ -501,9 +501,10 @@ public class HomePageActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (bottomSheet != null && bottomSheet.isSheetShowing())
+        if (bottomSheet != null && bottomSheet.isSheetShowing()) {
             bottomSheet.dismissSheet();
-        else
+            updateFloatingBtn(true);
+        } else
             super.onBackPressed();
 
     }
