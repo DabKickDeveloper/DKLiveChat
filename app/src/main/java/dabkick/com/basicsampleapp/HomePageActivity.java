@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -75,13 +76,22 @@ public class HomePageActivity extends BaseActivity {
         bottomSheet.addOnSheetStateChangeListener(new BottomSheetLayout.OnSheetStateChangeListener() {
             @Override
             public void onSheetStateChanged(BottomSheetLayout.State state) {
-                if (state == BottomSheetLayout.State.HIDDEN) {
+                if (state == BottomSheetLayout.State.HIDDEN && !isFragmentsVisible()) {
                     updateFloatingBtn(true);
                 } else {
                     updateFloatingBtn(false);
                 }
             }
         });
+    }
+
+    public boolean isFragmentsVisible() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.findFragmentByTag("chatRoom") != null)
+            return fragmentManager.findFragmentByTag("chatRoom").isVisible();
+        else if (fragmentManager.findFragmentByTag("viewMembers") != null)
+            return fragmentManager.findFragmentByTag("viewMembers").isVisible();
+        return false;
     }
 
     @Override
@@ -314,7 +324,7 @@ public class HomePageActivity extends BaseActivity {
                     case R.id.view_members:
                         ViewParticipantFragment participantFragment = ViewParticipantFragment.newInstance(roomName);
                         android.support.v4.app.FragmentTransaction memberTransaction = getSupportFragmentManager().beginTransaction();
-                        memberTransaction.replace(R.id.frag_container, participantFragment);
+                        memberTransaction.replace(R.id.frag_container, participantFragment, "viewMembers");
                         memberTransaction.addToBackStack(null);
                         memberTransaction.commit();
                         break;
