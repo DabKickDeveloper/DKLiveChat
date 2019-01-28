@@ -44,9 +44,7 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
             messageHolder.name.setText("You");
         } else if (name != null && !name.trim().isEmpty()) {
             messageHolder.name.setText(messageInfoList.get(i).getUserName());
-        else
-            messageHolder.name.setText("anonymous"); //if user name is not set, make it gone
-
+        }
         messageHolder.msg.setText(messageInfoList.get(i).getChatMessage());
 
         //for time stamp
@@ -63,10 +61,12 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
                 messageHolder.timeStamp.setText(Utils.millisToTime(currentMsgTime));
                 setTimeTextVisibility(currentMsgTime, prevMsgTime, messageHolder.dateTextLayout);
 
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        } else {
+            messageHolder.timeStamp.setVisibility(View.GONE);
         }
-
     }
 
     @Override
