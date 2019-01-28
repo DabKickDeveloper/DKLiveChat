@@ -340,13 +340,15 @@ public class HomePageActivity extends BaseActivity {
 
     public void showAlertForEnteringName(String roomName) {
         AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity);
-        final EditText edittext = new EditText(getApplicationContext());
-        edittext.setTextColor(getResources().getColor(android.R.color.black));
-        builder.setTitle("What is your name?");
-        builder.setView(edittext);
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.enter_name_dialog_layout, null);
+        builder.setView(view);
+
+        final EditText edittext = view.findViewById(R.id.new_name_edit_tex);
+
         builder.setPositiveButton("Set Name", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                if (edittext.getText().toString().isEmpty()) {
+                if (edittext.getText().toString().trim().isEmpty()) {
                     Snackbar.make(getCurrentFocus(), "Enter Name", Snackbar.LENGTH_LONG).show();
                     return;
                 } else {
