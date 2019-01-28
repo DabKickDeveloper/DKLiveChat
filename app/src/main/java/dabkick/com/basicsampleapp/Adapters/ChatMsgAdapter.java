@@ -3,6 +3,7 @@ package dabkick.com.basicsampleapp.Adapters;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import dabkick.com.basicsampleapp.R;
+import dabkick.com.basicsampleapp.SplashScreenActivity;
 import dabkick.com.basicsampleapp.Utils.Utils;
 import de.hdodenhof.circleimageview.CircleImageView;
-import timber.log.Timber;
 
 public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageHolder> {
 
@@ -36,27 +37,29 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
     @Override
     public void onBindViewHolder(@NonNull MessageHolder messageHolder, int i) {
         String name = messageInfoList.get(i).getUserName();
-        //dont diplay user name if not set
-        Timber.d("Value of user id is " + messageInfoList.get(i).getUserId());
-        if (name != null && !name.trim().isEmpty())
+        //     Log.d("ChatMsgAdapter", "Value of user id is " + messageInfoList.get(i).getUserId());
+        //set name to you, if its your message
+        String userId = messageInfoList.get(i).getId();
+        if (!TextUtils.isEmpty(SplashScreenActivity.dkLiveChat.getUserId()) && SplashScreenActivity.dkLiveChat.getUserId().equalsIgnoreCase(userId)) {
+            messageHolder.name.setText("You");
+        } else if (name != null && !name.trim().isEmpty()) {
             messageHolder.name.setText(messageInfoList.get(i).getUserName());
         }
         messageHolder.msg.setText(messageInfoList.get(i).getChatMessage());
 
-        //for profile pic
-//        String profileImgUrl = messageInfoList.get(i).getImg();
-//        Picasso.get().load("").placeholder(R.drawable.avatar_img).error(R.drawable.avatar_img).into(messageHolder.profileImg);
-
         //for time stamp
-        Log.d("TIMESTAMP", "" + messageInfoList.get(i).getMessageTime());
-        try {
-            long currentMsgTime = messageInfoList.get(i).getMessageTime();
-            long prevMsgTime = 0L;
-            if (i > 0) {
-                prevMsgTime = (messageInfoList.get(i - 1)).getMessageTime();
-            }
-            messageHolder.timeStamp.setText(Utils.millisToTime(currentMsgTime));
-            setTimeTextVisibility(currentMsgTime, prevMsgTime, messageHolder.dateTextLayout);
+        Log.d("ChatMsgAdapter", "isSystemMsg " + messageInfoList.get(i).isSystemMessage());
+        if (!messageInfoList.get(i).isSystemMessage()) {
+            Log.d("ChatMsgAdapter", "inside if");
+            try {
+                long currentMsgTime = messageInfoList.get(i).getMessageTime();
+                long prevMsgTime = 0L;
+                if (i > 0) {
+                    prevMsgTime = (messageInfoList.get(i - 1)).getMessageTime();
+                }
+                messageHolder.timeStamp.setVisibility(View.VISIBLE);
+                messageHolder.timeStamp.setText(Utils.millisToTime(currentMsgTime));
+                setTimeTextVisibility(currentMsgTime, prevMsgTime, messageHolder.dateTextLayout);
 
             } catch (NumberFormatException e) {
                 e.printStackTrace();
