@@ -331,7 +331,8 @@ public class HomePageActivity extends BaseActivity {
     public void showAlertForEnteringName(String roomName) {
         AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity);
         final EditText edittext = new EditText(getApplicationContext());
-        builder.setTitle("How would you like yourself to be called as?");
+        edittext.setTextColor(getResources().getColor(android.R.color.black));
+        builder.setTitle("What is your name?");
         builder.setView(edittext);
         builder.setPositiveButton("Set Name", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
