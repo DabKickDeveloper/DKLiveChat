@@ -1,9 +1,9 @@
 package dabkick.com.basicsampleapp;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -466,10 +466,11 @@ public class ChatRoomFragment extends Fragment {
 
 
     public void showAlertDialogWhileExiting() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity, R.style.ExitChatRoomDialogTheme);
+        android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity, R.style.ExitChatRoomDialogTheme);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.subscribe_layout, null);
         builder.setView(dialogView);
+        android.support.v7.app.AlertDialog alertDialog = builder.create();
 
         Button subscribe = dialogView.findViewById(R.id.subscribe);
         Button unSubscribe = dialogView.findViewById(R.id.unsubscribe);
@@ -488,6 +489,7 @@ public class ChatRoomFragment extends Fragment {
                     }
                 });
                 getActivity().onBackPressed();
+                alertDialog.dismiss();
                 //do nothing else as the user will remain subscribed
             }
         });
@@ -526,9 +528,11 @@ public class ChatRoomFragment extends Fragment {
                         });
 
                 getActivity().onBackPressed();
+                alertDialog.dismiss();
             }
         });
-        builder.setCancelable(true).create().show();
+        builder.setCancelable(true);
+        alertDialog.show();
     }
 
     public void sendMessage(String roomName, final String message) {
