@@ -467,7 +467,6 @@ public class ChatRoomFragment extends Fragment {
 
     }
 
-
     public void showAlertDialogWhileExiting() {
         android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.mCurrentActivity, R.style.ExitChatRoomDialogTheme);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -552,6 +551,22 @@ public class ChatRoomFragment extends Fragment {
                 public void onSuccess(String msg, Object... obj) {
                     Log.d("ChatRoomActivity", "onSuccess chat msg");
                     editText.setText("");
+                    if (getView() != null) {
+                        getView().setFocusableInTouchMode(true);
+                        getView().requestFocus();
+                        getView().setOnKeyListener(new View.OnKeyListener() {
+                            @Override
+                            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                                    showAlertDialogWhileExiting();
+                                    return true;
+                                }
+                                return false;
+                            }
+                        });
+
+                    }
                 }
 
                 @Override
