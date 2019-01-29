@@ -40,6 +40,8 @@ import dabkick.com.basicsampleapp.Adapters.RoomListAdapter;
 import dabkick.com.basicsampleapp.Model.Room;
 import dabkick.com.basicsampleapp.Utils.Utils;
 
+import static dabkick.com.basicsampleapp.ChatRoomFragment.chatMsgAdapter;
+
 public class HomePageActivity extends BaseActivity {
 
     @BindView(R.id.disconnect_text_view)
@@ -440,13 +442,14 @@ public class HomePageActivity extends BaseActivity {
                     @Override
                     public void run() {
                         String name = PreferenceHandler.getUserName(BaseActivity.mCurrentActivity);
-                        ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.setLatestRoomMsg(roomName, message.getChatMessage()/*time stamp*/);
-                        if (roomName.equalsIgnoreCase("")) {
-                        }
-                       /* synchronized (object) {
-                            String name = PreferenceHandler.getUserName(BaseActivity.mCurrentActivity);
-                            ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.setLatestRoomMsg(roomName, message.getChatMessage());
-                            *//*if (!message.getUserName().equalsIgnoreCase(name)) {
+                        ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.setLatestRoomMsg(roomName, message.getChatMessage());
+
+                        ChatRoomFragment chatRoomFragment = (ChatRoomFragment) getSupportFragmentManager().findFragmentByTag("chatRoom");
+                        if (chatRoomFragment != null && chatRoomFragment.isVisible()) {
+                            if (roomName.equalsIgnoreCase(chatRoomFragment.getRoomName())) {
+                                chatMsgAdapter.addMessage(message);
+                                chatRoomFragment.scrollToLatestMsg();
+                            } else if (!message.getUserName().equalsIgnoreCase(name)) {
                                 if (BaseActivity.mCurrentActivity.getClass() == HomePageActivity.class) {
                                     Room room = ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.getRoomItem(roomName);
                                     if (room != null) {
@@ -454,8 +457,10 @@ public class HomePageActivity extends BaseActivity {
                                         ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.updateRoomUponNewMsg(room);
                                     }
                                 }
-                            }*//*
-                        }*/
+                            }
+
+                        }
+
                     }
                 });
             }
