@@ -86,7 +86,9 @@ public class ViewParticipantFragment extends Fragment {
                     if (mNoCurrentUsersText != null)
                         mNoCurrentUsersText.setVisibility(View.VISIBLE);
                 }
-                mProgressBar.setVisibility(View.GONE);
+
+                if(mProgressBar != null)
+                    mProgressBar.setVisibility(View.GONE);
 
             }
 
