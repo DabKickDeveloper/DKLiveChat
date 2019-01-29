@@ -652,4 +652,9 @@ public class ChatRoomFragment extends Fragment {
             chatMsgAdapter = null;
         }
     }
+
+    public String getRoomName(){
+        return mRoomName;
+    }
+
 }
