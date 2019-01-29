@@ -80,9 +80,11 @@ public class ViewParticipantFragment extends Fragment {
                 participantList = (List<UserInfo>) objects[0];
                 if (participantList != null && participantList.size() > 0) {
                     setAdapter();
-                    mNoCurrentUsersText.setVisibility(View.GONE);
+                    if (mNoCurrentUsersText != null)
+                        mNoCurrentUsersText.setVisibility(View.GONE);
                 } else {
-                    mNoCurrentUsersText.setVisibility(View.VISIBLE);
+                    if (mNoCurrentUsersText != null)
+                        mNoCurrentUsersText.setVisibility(View.VISIBLE);
                 }
                 mProgressBar.setVisibility(View.GONE);
 
@@ -101,8 +103,10 @@ public class ViewParticipantFragment extends Fragment {
 
     public void setAdapter() {
         participantListAdapter = new ParticipantListAdapter(participantList);
-        mParticipantListView.setAdapter(participantListAdapter);
-        mParticipantListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if (mParticipantListView != null) {
+            mParticipantListView.setAdapter(participantListAdapter);
+            mParticipantListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
     }
 
 
