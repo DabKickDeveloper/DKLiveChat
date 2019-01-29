@@ -158,11 +158,6 @@ public class ChatRoomFragment extends Fragment {
             e.printStackTrace();
         }
 
-        if (SplashScreenActivity.dkLiveChat.isSubscribed(mRoomName)) {
-            chatMsgAdapter.addAllMessages(SplashScreenActivity.dkLiveChat.getAllMessageList(mRoomName));
-            chatListRecyclerView.scrollToPosition(chatMsgAdapter.getItemCount() - 1);
-        }
-
         if (HomePageActivity.isNewRoomCreated) {
             HomePageActivity.isNewRoomCreated = false;
             SplashScreenActivity.dkLiveChat.chatRoomListener.createNewRoom(new CallbackListener() {
@@ -314,6 +309,15 @@ public class ChatRoomFragment extends Fragment {
                     mProgressBar.setVisibility(View.GONE);
                 }
             });
+        }
+
+        if (SplashScreenActivity.dkLiveChat.isSubscribed(mRoomName)) {
+            if (SplashScreenActivity.dkLiveChat.getAllMessageList(mRoomName).size() == 0) {
+                chatMsgAdapter.addAllMessages(SplashScreenActivity.dkLiveChat.chatEventListener.getChatMessages(mRoomName));
+            } else {
+                chatMsgAdapter.addAllMessages(SplashScreenActivity.dkLiveChat.getAllMessageList(mRoomName));
+            }
+            chatListRecyclerView.scrollToPosition(chatMsgAdapter.getItemCount() - 1);
         }
 
         chatListRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
