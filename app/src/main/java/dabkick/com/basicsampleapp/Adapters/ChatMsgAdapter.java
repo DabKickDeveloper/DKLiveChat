@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dabkick.engine.Public.MessageInfo;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,7 +30,7 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
     @Override
     public MessageHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.row_item_msg, viewGroup, false);
+                    .inflate(R.layout.row_item_msg, viewGroup, false);
 
         return new MessageHolder(itemView);
     }
@@ -37,8 +38,6 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
     @Override
     public void onBindViewHolder(@NonNull MessageHolder messageHolder, int i) {
         String name = messageInfoList.get(i).getUserName();
-        //     Log.d("ChatMsgAdapter", "Value of user id is " + messageInfoList.get(i).getUserId());
-        //set name to you, if its your message
         String userId = messageInfoList.get(i).getId();
         if (!TextUtils.isEmpty(SplashScreenActivity.dkLiveChat.getUserId()) && SplashScreenActivity.dkLiveChat.getUserId().equalsIgnoreCase(userId)) {
             messageHolder.name.setText("You");
@@ -67,6 +66,10 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
         } else {
             messageHolder.timeStamp.setVisibility(View.GONE);
         }
+
+        //for profile pic
+//        String profileImgUrl = messageInfoList.get(i).getImg();
+//        Picasso.get().load(profileImgUrl).placeholder(R.drawable.avatar_img).error(R.drawable.avatar_img).into(messageHolder.profileImg);
     }
 
     @Override
