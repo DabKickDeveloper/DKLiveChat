@@ -8,12 +8,12 @@
         android:id="@+id/date_time_stamp_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="13th January"
         android:layout_centerHorizontal="true"
-        android:padding="10dp"
-        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_corner_grey"
-        android:layout_marginBottom="10dp"/>
+        android:padding="10dp"
+        android:text="13th January"
+        android:textSize="15sp" />
 
     <RelativeLayout
         android:id="@+id/main_layout"
@@ -53,10 +53,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="3dp"
             android:layout_toRightOf="@+id/profile_pic_img"
+            android:autoLink="all"
             android:text="fhdsfkjksjd"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textIsSelectable="true"/>
+            android:textIsSelectable="true"
+            android:textSize="20sp" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/time_stamp_text_view"
@@ -67,9 +68,9 @@
             android:layout_marginTop="3dp"
             android:layout_marginRight="16dp"
             android:textColor="@color/text_gray"
-            android:visibility="gone"
+            android:textIsSelectable="true"
             android:textSize="15sp"
-            android:textIsSelectable="true"/>
+            android:visibility="gone" />
     </RelativeLayout>
 
 </RelativeLayout>
