@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import dabkick.com.basicsampleapp.BaseActivity;
+import dabkick.com.basicsampleapp.GlideApp;
 import dabkick.com.basicsampleapp.R;
 import dabkick.com.basicsampleapp.SplashScreenActivity;
 import dabkick.com.basicsampleapp.Utils.Utils;
@@ -69,9 +71,10 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
 
         //for profile pic
         String profileImgUrl = messageInfoList.get(i).getProfilePicUrl();
-        if(!TextUtils.isEmpty(profileImgUrl))
-            Picasso.get().load(profileImgUrl).placeholder(R.drawable.avatar_img).error(R.drawable.avatar_img).into(messageHolder.profileImg);
-
+        if(!TextUtils.isEmpty(profileImgUrl)) {
+            GlideApp.with(BaseActivity.mCurrentActivity).load(profileImgUrl).centerCrop().placeholder(R.drawable.avatar_img)
+                    .error(R.drawable.avatar_img).into(messageHolder.profileImg);
+        }
     }
 
     @Override
