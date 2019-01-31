@@ -661,7 +661,7 @@ public class ChatRoomFragment extends Fragment {
         }
     }
 
-    public String getRoomName(){
+    public String getRoomName() {
         return mRoomName;
     }
 

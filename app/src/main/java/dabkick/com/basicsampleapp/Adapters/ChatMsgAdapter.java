@@ -10,15 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dabkick.engine.Public.MessageInfo;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import dabkick.com.basicsampleapp.BaseActivity;
-import dabkick.com.basicsampleapp.GlideApp;
 import dabkick.com.basicsampleapp.R;
 import dabkick.com.basicsampleapp.SplashScreenActivity;
 import dabkick.com.basicsampleapp.Utils.Utils;
@@ -32,7 +31,7 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
     @Override
     public MessageHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.row_item_msg, viewGroup, false);
+                .inflate(R.layout.row_item_msg, viewGroup, false);
 
         return new MessageHolder(itemView);
     }
@@ -71,9 +70,9 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
 
         //for profile pic
         String profileImgUrl = messageInfoList.get(i).getProfilePicUrl();
-        if(!TextUtils.isEmpty(profileImgUrl)) {
-            GlideApp.with(BaseActivity.mCurrentActivity).load(profileImgUrl).centerCrop().placeholder(R.drawable.avatar_img)
-                    .error(R.drawable.avatar_img).into(messageHolder.profileImg);
+        if (!TextUtils.isEmpty(profileImgUrl)) {
+            Glide.with(BaseActivity.mCurrentActivity).load(profileImgUrl)
+                    .into(messageHolder.profileImg);
         }
     }
 

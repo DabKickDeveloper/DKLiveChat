@@ -116,6 +116,7 @@ public class ProfileSettingsFragment extends Fragment implements View.OnClickLis
                     @Override
                     public void onSuccess(String s, Object... objects) {
                         Toast.makeText(BaseActivity.mCurrentActivity, "Successfully uploaded profile img", Toast.LENGTH_LONG).show();
+                        PreferenceHandler.setUserProfileImg(getActivity(), s);
 
                     }
 
