@@ -68,8 +68,10 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
         }
 
         //for profile pic
-//        String profileImgUrl = messageInfoList.get(i).getImg();
-//        Picasso.get().load(profileImgUrl).placeholder(R.drawable.avatar_img).error(R.drawable.avatar_img).into(messageHolder.profileImg);
+        String profileImgUrl = messageInfoList.get(i).getProfilePicUrl();
+        if(!TextUtils.isEmpty(profileImgUrl))
+            Picasso.get().load(profileImgUrl).placeholder(R.drawable.avatar_img).error(R.drawable.avatar_img).into(messageHolder.profileImg);
+
     }
 
     @Override

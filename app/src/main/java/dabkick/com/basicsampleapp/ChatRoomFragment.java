@@ -237,8 +237,8 @@ public class ChatRoomFragment extends Fragment {
                     messageInfo.setUserName(participant.getName());
                     messageInfo.setChatMessage(userEnteredMessage);
                     messageInfo.setSystemMessage(true);
-//                    if(participant.getProfilePicUrl() != null)
-//                        messageInfo.setProfilePicUrl(participant.getProfilePicUrl());
+                    if(participant.getProfilePicUrl() != null)
+                        messageInfo.setProfilePicUrl(participant.getProfilePicUrl());
                     if (chatMsgAdapter != null) {
                         chatMsgAdapter.addMessage(messageInfo);
                         scrollToLatestMsg();
@@ -257,8 +257,8 @@ public class ChatRoomFragment extends Fragment {
                     messageInfo.setUserName(participant.getName());
                     messageInfo.setChatMessage(userEnteredMessage);
                     messageInfo.setSystemMessage(true);
-//                    if(participant.getProfilePicUrl() != null)
-//                        messageInfo.setProfilePicUrl(participant.getProfilePicUrl());
+                    if(participant.getProfilePicUrl() != null)
+                        messageInfo.setProfilePicUrl(participant.getProfilePicUrl());
                     if (chatMsgAdapter != null) {
                         chatMsgAdapter.addMessage(messageInfo);
                         scrollToLatestMsg();
@@ -550,9 +550,9 @@ public class ChatRoomFragment extends Fragment {
 
             MessageInfo messageInfo = new MessageInfo();
             messageInfo.setChatMessage(message);
-//            if(PreferenceHandler.getUserProfileImg(BaseActivity.mCurrentActivity) != null) {
-//                messageInfo.setProfilePicUrl(PreferenceHandler.getUserProfileImg(BaseActivity.mCurrentActivity));
-//            }
+            if(PreferenceHandler.getUserProfileImg(BaseActivity.mCurrentActivity) != null) {
+                messageInfo.setProfilePicUrl(PreferenceHandler.getUserProfileImg(BaseActivity.mCurrentActivity));
+            }
             //STEP 6: Sending and Receiving Messages
             dkLiveChat.chatEventListener.sendMessage(roomName, messageInfo, new CallbackListener() {
                 @Override
