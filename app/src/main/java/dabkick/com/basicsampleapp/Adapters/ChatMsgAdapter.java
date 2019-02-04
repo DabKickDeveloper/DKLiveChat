@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.dabkick.engine.Public.MessageInfo;
 
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import dabkick.com.basicsampleapp.BaseActivity;
+import dabkick.com.basicsampleapp.GlideApp;
 import dabkick.com.basicsampleapp.R;
 import dabkick.com.basicsampleapp.SplashScreenActivity;
 import dabkick.com.basicsampleapp.Utils.Utils;
@@ -70,9 +71,15 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
 
         //for profile pic
         String profileImgUrl = messageInfoList.get(i).getProfilePicUrl();
-        if (!TextUtils.isEmpty(profileImgUrl)) {
-            Glide.with(BaseActivity.mCurrentActivity).load(profileImgUrl)
-                    .into(messageHolder.profileImg);
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.avatar_img);
+        requestOptions.error(R.drawable.avatar_img);
+        if (profileImgUrl != null) {
+            if (!TextUtils.isEmpty(profileImgUrl)) {
+                GlideApp.with(BaseActivity.mCurrentActivity).applyDefaultRequestOptions(requestOptions).load(profileImgUrl).into(messageHolder.profileImg);
+            }
+        } else {
+            messageHolder.profileImg.setImageResource(R.drawable.avatar_img);
         }
     }
 

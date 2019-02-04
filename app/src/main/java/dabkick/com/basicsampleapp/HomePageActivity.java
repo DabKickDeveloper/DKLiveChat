@@ -12,6 +12,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -453,6 +454,7 @@ public class HomePageActivity extends BaseActivity {
                             if (BaseActivity.mCurrentActivity.getClass() == HomePageActivity.class) {
                                 Room room = ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.getRoomItem(roomName);
                                 latestMessageList.add(message);
+                                Log.d("TEST", "Latest Message size is " + latestMessageList.size());
                                 if (room != null) {
                                     room.addUnreadMsg(message);
                                     ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.updateRoomUponNewMsg(room);
