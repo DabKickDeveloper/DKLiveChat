@@ -113,6 +113,7 @@ public class ChatMsgAdapter extends RecyclerView.Adapter<ChatMsgAdapter.MessageH
         notifyDataSetChanged();
     }
 
+
     public void clearMsgs() {
         this.messageInfoList.clear();
     }

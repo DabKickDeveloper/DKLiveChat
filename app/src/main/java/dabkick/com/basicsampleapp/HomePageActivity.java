@@ -63,6 +63,7 @@ public class HomePageActivity extends BaseActivity {
     public static boolean isNewRoomCreated = false;
     public LiveChatCallbackListener liveChatCallbackListener;
     public UserPresenceCallBackListener userPresenceCallBackListener;
+    public List<MessageInfo> latestMessageList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -451,6 +452,7 @@ public class HomePageActivity extends BaseActivity {
                         } else if (!message.getUserName().equalsIgnoreCase(name)) {
                             if (BaseActivity.mCurrentActivity.getClass() == HomePageActivity.class) {
                                 Room room = ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.getRoomItem(roomName);
+                                latestMessageList.add(message);
                                 if (room != null) {
                                     room.addUnreadMsg(message);
                                     ((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter.updateRoomUponNewMsg(room);

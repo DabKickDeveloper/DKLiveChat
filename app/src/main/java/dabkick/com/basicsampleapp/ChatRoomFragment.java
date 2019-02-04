@@ -79,6 +79,7 @@ public class ChatRoomFragment extends Fragment {
     private View view;
     public FragmentCloseListener fragmentCloseListener;
 
+
     Object object = new Object();
 
     public ChatRoomFragment() {
@@ -237,7 +238,7 @@ public class ChatRoomFragment extends Fragment {
                     messageInfo.setUserName(participant.getName());
                     messageInfo.setChatMessage(userEnteredMessage);
                     messageInfo.setSystemMessage(true);
-                    if(participant.getProfilePicUrl() != null)
+                    if (participant.getProfilePicUrl() != null)
                         messageInfo.setProfilePicUrl(participant.getProfilePicUrl());
                     if (chatMsgAdapter != null) {
                         chatMsgAdapter.addMessage(messageInfo);
@@ -257,7 +258,7 @@ public class ChatRoomFragment extends Fragment {
                     messageInfo.setUserName(participant.getName());
                     messageInfo.setChatMessage(userEnteredMessage);
                     messageInfo.setSystemMessage(true);
-                    if(participant.getProfilePicUrl() != null)
+                    if (participant.getProfilePicUrl() != null)
                         messageInfo.setProfilePicUrl(participant.getProfilePicUrl());
                     if (chatMsgAdapter != null) {
                         chatMsgAdapter.addMessage(messageInfo);
@@ -320,6 +321,10 @@ public class ChatRoomFragment extends Fragment {
                 chatMsgAdapter.addAllMessages(SplashScreenActivity.dkLiveChat.chatEventListener.getChatMessages(mRoomName));
             } else {
                 chatMsgAdapter.addAllMessages(SplashScreenActivity.dkLiveChat.getAllMessageList(mRoomName));
+                if (((HomePageActivity) getActivity()).latestMessageList.size() > 0) {
+                    chatMsgAdapter.addAllMessages(((HomePageActivity) getActivity()).latestMessageList);
+                    ((HomePageActivity) getActivity()).latestMessageList.clear();
+                }
             }
             chatListRecyclerView.scrollToPosition(chatMsgAdapter.getItemCount() - 1);
         }
@@ -550,7 +555,7 @@ public class ChatRoomFragment extends Fragment {
 
             MessageInfo messageInfo = new MessageInfo();
             messageInfo.setChatMessage(message);
-            if(PreferenceHandler.getUserProfileImg(BaseActivity.mCurrentActivity) != null) {
+            if (PreferenceHandler.getUserProfileImg(BaseActivity.mCurrentActivity) != null) {
                 messageInfo.setProfilePicUrl(PreferenceHandler.getUserProfileImg(BaseActivity.mCurrentActivity));
             }
             //STEP 6: Sending and Receiving Messages
