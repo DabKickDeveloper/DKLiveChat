@@ -524,7 +524,7 @@ public class ChatRoomFragment extends Fragment {
 
                 //STEP 8: Exiting a room: unsubscribe
                 SplashScreenActivity.dkLiveChat
-                        .unSubscribe(mRoomName, liveChatCallbackListener, userPresenceCallBackListener, new CallbackListener() {
+                        .unSubscribe(mRoomName, ((HomePageActivity) getActivity()).liveChatCallbackListener == null ? liveChatCallbackListener : ((HomePageActivity) getActivity()).liveChatCallbackListener, ((HomePageActivity) getActivity()).userPresenceCallBackListener == null ? userPresenceCallBackListener : ((HomePageActivity) getActivity()).userPresenceCallBackListener, new CallbackListener() {
                             @Override
                             public void onSuccess(String msg, Object... obj) {
                                 if (((HomePageActivity) BaseActivity.mCurrentActivity).mRoomListAdapter != null) {
