@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
@@ -16,9 +17,12 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dabkick.engine.Public.CallbackListener;
+import com.dabkick.engine.Public.UserInfo;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -36,6 +40,10 @@ public class ProfileSettingsFragment extends Fragment implements View.OnClickLis
     AppCompatImageView mProfileImgView;
     @BindView(R.id.profile_pic_edit_view)
     AppCompatTextView mEditTextBtn;
+    @BindView(R.id.editName)
+    EditText editName;
+    @BindView(R.id.updateName)
+    Button updateName;
 
     public static final int PERMISSIONS_REQUEST_CAMERA = 0;
     public static final int CAMERA_REQUEST_CODE = 100;
@@ -55,6 +63,7 @@ public class ProfileSettingsFragment extends Fragment implements View.OnClickLis
 
         ButterKnife.bind(this, view);
         mEditTextBtn.setOnClickListener(this);
+        updateName.setOnClickListener(this);
 
         if (getActivity().getClass() == HomePageActivity.class) {
             ((HomePageActivity) getActivity()).updateFloatingBtn(false);
@@ -145,7 +154,33 @@ public class ProfileSettingsFragment extends Fragment implements View.OnClickLis
                 isCameraPermissionGranted = false;
                 requestPermissions(new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_CAMERA);
             } else {
+                editName.setVisibility(View.VISIBLE);
+                mUserName.setVisibility(View.GONE);
+                updateName.setVisibility(View.VISIBLE);
                 takePicture();
+            }
+        } else if (view.getId() == R.id.updateName) {
+            if (!editName.getText().toString().trim().isEmpty()) {
+                UserInfo userInfo = new UserInfo();
+                userInfo.setName(editName.getText().toString());
+                userInfo.setUserId(PreferenceHandler.getUserId(getActivity()));
+                userInfo.setProfilePicUrl(PreferenceHandler.getUserProfileImg(getActivity()));
+                SplashScreenActivity.dkLiveChat.updateName(userInfo, new CallbackListener() {
+                    @Override
+                    public void onSuccess(String s, Object... objects) {
+                        PreferenceHandler.setUserName(getActivity(), editName.getText().toString());
+                        editName.setVisibility(View.GONE);
+                        updateName.setVisibility(View.GONE);
+                        mUserName.setText("Username: " + PreferenceHandler.getUserName(BaseActivity.mCurrentActivity));
+                    }
+
+                    @Override
+                    public void onError(String s, Object... objects) {
+
+                    }
+                });
+            } else {
+                Snackbar.make(view, "Enter Name", Snackbar.LENGTH_LONG).show();
             }
         }
     }

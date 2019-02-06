@@ -2,40 +2,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:clickable="true">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/profile_img_view"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/avatar_img"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="50dp"
+        android:src="@drawable/avatar_img" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/profile_pic_edit_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAllCaps="true"
-        android:text="EDIT"
-        android:clickable="true"
-        android:textSize="22sp"
-        android:textColor="@android:color/holo_blue_bright"
-        android:textStyle="bold"
+        android:layout_below="@+id/profile_img_view"
         android:layout_margin="5dp"
         android:layout_toRightOf="@+id/profile_img_view"
-        android:layout_below="@+id/profile_img_view"
-        />
+        android:clickable="true"
+        android:text="EDIT"
+        android:textAllCaps="true"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/profile_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_pic_edit_view"
-        android:text="User Name: "
-        android:gravity="center_horizontal"
         android:layout_marginTop="35dp"
-        android:textSize="20sp"/>
+        android:gravity="center_horizontal"
+        android:text="User Name: "
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_pic_edit_view"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/updateName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editName"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:text="Update Name"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
 </RelativeLayout>
